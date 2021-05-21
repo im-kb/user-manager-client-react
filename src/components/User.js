@@ -1,12 +1,14 @@
 import '../userCardStyle.css'
 import {Card, Image} from "react-bootstrap";
+import DeleteButton from "./DeleteButton";
+import EditButton from "./EditButton";
 
 const User = ({user}) => {
     return (
         <Card className="card">
             <Card.Body className="card-body text-center">
                 <Card.Img src={user.imageUrl} style={{width: "100px", marginTop: "-65px"}}
-                       alt="User" className="img-fluid img-thumbnail rounded-circle border-0 mb-3"/>
+                          alt="User" className="img-fluid img-thumbnail rounded-circle border-0 mb-3"/>
                 <h5 className="card-title">{user.name}</h5>
                 <p className="text-secondary mb-1">{user.jobTitle}</p>
                 <p className="text-secondary mb-1">{user.name}</p>
@@ -16,11 +18,8 @@ const User = ({user}) => {
             </div>
             <Card.Footer className="cardFooter">
                 <div style={{marginLeft: 'auto'}}>
-                    <button className="btn btn-primary tooltips" data-bs-target="#myModal" data-bs-toggle="modal"><i
-                        className="fa fa-pencil"></i></button>
-                    <button className="btn btn-secondary tooltips" data-bs-target="#deleteModal" data-bs-toggle="modal">
-                        <i
-                            className="fa fa-times "></i></button>
+                    <EditButton/>
+                    <DeleteButton/>
                 </div>
             </Card.Footer>
         </Card>

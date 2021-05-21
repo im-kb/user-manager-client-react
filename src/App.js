@@ -5,18 +5,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import NoUsersFound from "./components/NoUsersFound";
 import Users from "./components/Users";
-import User from "./components/User";
-import {COMPONENT_NAME} from 'react-bootstrap';
-import {Image} from "react-bootstrap";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import DeleteModal from "./components/DeleteModal";
+import SearchBar from "./components/SearchBar";
 
 function App() {
+    const [input, setInput] = useState('');
     const [users, setUsers] = useState([])
+    const [filteredUsers, setFilteredUsers] = useState([])
 
     useEffect(() => {
         const getUsers = async () => {
             const usersFromServer = await fetchUsers()
             setUsers(usersFromServer)
+            setFilteredUsers(usersFromServer)
         }
 
         getUsers()
@@ -28,15 +29,28 @@ function App() {
         return data;
     }
 
+    const updateInput = async (input) => {
+        const filtered = users.filter(user => {
+            return user.name.toLowerCase().includes(input.toLowerCase())
+        })
+        setInput(input);
+        setFilteredUsers(filtered);
+        console.log(filteredUsers)
+    }
+
     return (
 
         <div className="App">
-            <Header />
 
-            {users.length < 1 ? (<NoUsersFound/>) : (<Users users={users}/>)}
+            <DeleteModal></DeleteModal>
+            <Header input={input} onChange={updateInput} setInput={setInput}></Header>
+            <SearchBar keyword={input}
+                       setKeyword={updateInput}></SearchBar>
+            {users.length < 1 ? (<NoUsersFound/>) : (<Users users={filteredUsers}/>)}
 
         </div>
     );
+
 
 }
 
