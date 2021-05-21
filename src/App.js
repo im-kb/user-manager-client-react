@@ -6,7 +6,6 @@ import 'font-awesome/css/font-awesome.min.css';
 import NoUsersFound from "./components/NoUsersFound";
 import Users from "./components/Users";
 import DeleteModal from "./components/DeleteModal";
-import SearchBar from "./components/SearchBar";
 
 function App() {
     const [input, setInput] = useState('');
@@ -39,13 +38,10 @@ function App() {
     }
 
     return (
-
         <div className="App">
 
             <DeleteModal></DeleteModal>
-            <Header input={input} onChange={updateInput} setInput={setInput}></Header>
-            <SearchBar keyword={input}
-                       setKeyword={updateInput}></SearchBar>
+            <Header keyword={input}setKeyword={updateInput}></Header>
             {users.length < 1 ? (<NoUsersFound/>) : (<Users users={filteredUsers}/>)}
 
         </div>
@@ -53,9 +49,4 @@ function App() {
 
 
 }
-
-Header.defaultProps =
-    {
-        title: 'BLAA',
-    }
 export default App;

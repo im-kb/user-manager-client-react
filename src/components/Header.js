@@ -1,11 +1,11 @@
 import SearchBar from "./SearchBar";
 
-const Header = ({input, onChange, setInput}) => {
+const Header = ({keyword, setKeyword}) => {
     return (
         <div className="navbar navbar-expand-md navbar-light bg-light" role="navigation">
             <a className="navbar-brand" href="#">User menager</a>
 
-            {/*<SearchBar input={input} onChange={onChange} setInput={setInput}/>*/}
+            <SearchBar keyword={keyword}setKeyword={setKeyword}></SearchBar>
 
         </div>
     )
